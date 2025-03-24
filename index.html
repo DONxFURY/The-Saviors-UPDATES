@@ -16,15 +16,8 @@
             align-items: center;
             overflow: hidden;
             position: relative;
-        }
-        video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -1;
+            background: url('image_fx_.jpg') no-repeat center center fixed;
+            background-size: cover;
         }
         .update-box {
             background: rgba(30, 30, 30, 0.95);
@@ -105,9 +98,6 @@
     </style>
 </head>
 <body>
-    <video autoplay loop muted>
-        <source src="background-video.mp4" type="video/mp4">
-    </video>
     <div class="update-box">
         <div class="tabs">
             <div class="tab active" onclick="switchTab('newest')">Newest Updates</div>
@@ -125,15 +115,16 @@
     <script>
         const updates = {
             newest: [
-                { title: "🎨 12 FREE BASES", desc: "Allows users to claim free bases." },
-                { title: "📈 Zombie Boost", desc: "10-20 more zombies in each city/town." },
-                { title: "📈 2 Massive Bunckers", desc: "Loot Will Be Added To Them Soon!" },
+                { title: "🎨 New theme customization", desc: "Allows users to change UI colors dynamically." },
+                { title: "📈 Performance boost", desc: "Optimized backend queries for faster load times." },
+                { title: "🔔 Notification system", desc: "Added real-time notifications for important events." }
             ],
             upcoming: [
-                { title: "⚡ Performance boost", desc: "Optimized server files for faster load times." },
-                { title: "📅 Events And Tasks", desc: "Tasks and Events All Around The Map." }
+                { title: "⚡ Dark mode support", desc: "Soon you'll be able to toggle dark mode for better night usability." },
+                { title: "📅 Calendar sync", desc: "Integration with calendar apps to sync your tasks and events." }
             ]
         };
+
         function populateUpdates() {
             document.getElementById("newestList").innerHTML = updates.newest
                 .map(item => `<li>${item.title}<span class='tooltip'>${item.desc}</span></li>`)
@@ -142,12 +133,14 @@
                 .map(item => `<li>${item.title}<span class='tooltip'>${item.desc}</span></li>`)
                 .join('');
         }
+
         function switchTab(tabName) {
             document.querySelectorAll('.content').forEach(content => content.classList.remove('active'));
             document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
             document.getElementById(tabName).classList.add('active');
             document.querySelector(`[onclick="switchTab('${tabName}')"]`).classList.add('active');
         }
+
         populateUpdates();
     </script>
 </body>
