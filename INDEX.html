@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Alert</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1c1c1c, #2a2a72);
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .update-box {
+            background: rgba(30, 30, 30, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 200, 255, 0.4);
+            max-width: 600px;
+            text-align: center;
+            position: relative;
+        }
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            background: #444;
+            margin: 0 5px;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        .tab.active {
+            background: #00e1ff;
+            color: #121212;
+        }
+        .content {
+            display: none;
+        }
+        .content.active {
+            display: block;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        ul li {
+            background: rgba(43, 43, 43, 0.9);
+            padding: 12px;
+            margin: 6px 0;
+            border-radius: 8px;
+            transition: 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+        ul li:hover {
+            background: #00e1ff;
+            color: #121212;
+            transform: scale(1.05);
+        }
+        .tooltip {
+            display: none;
+            position: absolute;
+            background: #fff;
+            color: #000;
+            padding: 8px;
+            border-radius: 5px;
+            font-size: 12px;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        ul li:hover .tooltip {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="update-box">
+        <div class="tabs">
+            <div class="tab active" onclick="switchTab('newest')">Newest Updates</div>
+            <div class="tab" onclick="switchTab('upcoming')">Upcoming & Improvements</div>
+        </div>
+        <div id="newest" class="content active">
+            <h3>🚀 Latest Updates</h3>
+            <ul id="newestList"></ul>
+        </div>
+        <div id="upcoming" class="content">
+            <h3>🔮 Upcoming Features & Improvements</h3>
+            <ul id="upcomingList"></ul>
+        </div>
+    </div>
+
+    <script>
+        const updates = {
+            newest: [
+                { title: "🎨 12 FREE BASES", desc: "Allows users to claim free bases." },
+                { title: "📈 Zombie Boost", desc: "10-20 more zombies in each city/town." },
+            ],
+            upcoming: [
+                { title: "⚡ Performance boost", desc: "Optimized server files for faster load times." },
+                { title: "📅 Calendar sync", desc: "Integration with calendar apps to sync your tasks and events." }
+            ]
+        };
+
+        function populateUpdates() {
+            document.getElementById("newestList").innerHTML = updates.newest.map(item => `<li>${item.title}<span class='tooltip'>${item.desc}</span></li>`).join('');
+            document.getElementById("upcomingList").innerHTML = updates.upcoming.map(item => `<li>${item.title}<span class='tooltip'>${item.desc}</span></li>`).join('');
+        }
+
+        function switchTab(tabName) {
+            document.querySelectorAll('.content').forEach(content => content.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.getElementById(tabName).classList.add('active');
+            document.querySelector(`[onclick="switchTab('${tabName}')"]`).classList.add('active');
+        }
+
+        populateUpdates();
+    </script>
+</body>
+</html>
